@@ -1,0 +1,9 @@
+usamos las entidades , que nos idique como es que son los objetos
+ de base de datos sin depender de la base de datos , por ejemplo ,  ; .
+
+si yo quiere regersar un usuario , NO regresar el modelo de mogoose
+para no amarrar la aplicacion enetera a mongoose  
+porque si la cambiamos, ya sea la based de datps o el modelo
+to do lo dependiente tendra errores encascada
+
+
