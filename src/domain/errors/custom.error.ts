@@ -29,3 +29,5 @@ export class CustomError extends Error {
         return new CustomError(500, message);
 }
 }
+
+//podriamos gravar los mensajes con winston

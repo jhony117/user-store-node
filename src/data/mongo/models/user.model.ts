@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
         default:false,
     },
     password : {
-        tyoe :String ,
+        type :String ,
         required : [true, 'Password id required'],
     },
     img : {
