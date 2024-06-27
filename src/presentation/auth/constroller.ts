@@ -27,8 +27,6 @@ export class AuthController {
         if(error) return res.status(400).json({error})
 
             
- 
-
 
        this.authService.registerUser(registerUserDto!)
        .then((user) => res.json(user))
@@ -48,11 +46,17 @@ export class AuthController {
     validateEmail = (req:Request, res:Response) => {
         const {token} =  req.params; 
 
-        
+
         this.authService.validateEmail(token)
-        .then(() => res.json('Email Validated'))
+        .then(() => res.json('Email was validated properly'))
         .catch(error => this.handleError(error, res))
 
 
     }
 }
+
+//Estudia ngrok
+
+
+
+//VSports 
