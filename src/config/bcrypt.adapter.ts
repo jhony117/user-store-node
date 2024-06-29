@@ -1,6 +1,6 @@
-import { compare, compareSync, genSaltSync, hashSync} from 'bcryptjs';
+import {  compareSync, genSaltSync, hashSync} from 'bcryptjs';
 
-export const bcryotAdapter = {
+export const bcryptAdapter = {
     hash : (password:string) => {
         const salt = genSaltSync();
         return hashSync(password, salt)

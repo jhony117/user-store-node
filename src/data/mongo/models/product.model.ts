@@ -30,5 +30,13 @@ default : 0,
 });
 
 
+productSchema.set('toJSON', {
+    virtuals :true,
+    versionKey : false,
+    transform: function(doc, ret, options) { //no usar funcnion de flcha
+         delete ret._id;
+    },
+})
+
 
 export const ProductModel = mongoose.model('Product', productSchema);

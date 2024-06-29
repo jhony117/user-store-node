@@ -1,14 +1,15 @@
 import { Request, Response } from "express";
-import { CretaeCategoryDto, CustomError, PaginationDto } from "../../domain";
+import { CreateProductDto, CretaeCategoryDto, CustomError, PaginationDto } from "../../domain";
 import { CategoryService } from '../services/category.service';
+import { ProductService } from "../services/product.service";
 
 
-export class CategoryController {
+export class ProductController {
 
 
     // DI
     constructor(
-        private readonly categoryService:CategoryService
+         private readonly productService:ProductService
     ){}
 
 
@@ -17,41 +18,39 @@ export class CategoryController {
                 return res.status(error.statusCode).json({error : error.message});
         }
 
-        console.log(error);
+        console.log(`${error}`);
 
         return res.status(500).json({error : 'Internla Server Error'})
     }
 
-    createCategory = async(req: Request, res:Response) => {
-        const [error, createCategoryDto] =   CretaeCategoryDto.create(req.body);
+    createProduct = async(req: Request, res:Response) => {
+        const [error, createProductDto] =   CreateProductDto.create({
+            ...req.body,
+        user : req.body.user.id});
         if (error) return res.status(400).json();
 
-        this.categoryService.createCategory(createCategoryDto!, req.body.user)
-        .then(category => res.status(201).json(category))
+        this.productService.createProduct(createProductDto!)
+        .then(products => res.status(201).json(products))
         .catch(error => this.handleError(error, res));
 
 
+ 
 
-        // res.json(createCategoryDto);
+        return  res.json('create Products');
 
     }
 
-    getCategory = async(req: Request, res:Response) => {
+    getProducts = async(req: Request, res:Response) => {
    
         const {page = 1, limit =10 } =  req.query;
         const [error, paginationDto] = PaginationDto.create(+page, +limit);
         if (error) return res.status(400).json({error});
 
-        res.json(paginationDto);
 
 
 
-
-
-
-
-            this.categoryService.getCategories(paginationDto!)
-            .then(categories => res.json(categories))
+            this.productService.getCategories(paginationDto!)
+            .then(products => res.json(products))
             .catch(error => this.handleError(error, res));
     }
 }
